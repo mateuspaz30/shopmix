@@ -12,10 +12,17 @@
         body { font-family: 'Inter', sans-serif; background-color: #fdf2f8; padding-bottom: 120px; }
         .pink-gradient { background: linear-gradient(135deg, #f472b6, #db2777); }
         .glass { background: rgba(255, 255, 255, 0.7); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.4); }
+        
+        /* Remove a barra de rolagem visual nas categorias */
         .no-scrollbar::-webkit-scrollbar { display: none; }
         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
         .category-btn.active { background: #db2777 !important; color: white !important; box-shadow: 0 4px 12px rgba(219, 39, 119, 0.3); }
         .hidden { display: none !important; }
+        
+        /* Ajuste para os cards não ficarem gigantes no PC */
+        .product-card { transition: transform 0.2s; }
+        .product-card:hover { transform: translateY(-2px); }
     </style>
 </head>
 <body>
@@ -36,13 +43,13 @@
         </div>
 
         <div class="px-6 flex justify-center gap-3 relative z-20">
-            <a href="https://www.instagram.com/shopmixipua/" target="_blank" class="glass px-5 py-2 rounded-2xl shadow-md flex items-center gap-2 hover:scale-105 transition">
+            <a href="https://www.instagram.com/shopmixipua/" target="_blank" class="glass px-5 py-2 rounded-2xl shadow-md flex items-center gap-2">
                 <i class="fa-brands fa-instagram text-pink-600"></i>
                 <span class="text-[10px] font-black uppercase text-pink-900">Instagram</span>
             </a>
-            <a href="https://wa.me/5516999999999" class="glass px-5 py-2 rounded-2xl shadow-md flex items-center gap-2 hover:scale-105 transition">
+            <a href="https://wa.me/5516999999999" class="glass px-5 py-2 rounded-2xl shadow-md flex items-center gap-2">
                 <i class="fa-brands fa-whatsapp text-green-600"></i>
-                <span class="text-[10px] font-black uppercase text-pink-900">WhatsApp</span>
+                <span class="text-[10px] font-black uppercase text-pink-900">Consultoria</span>
             </a>
         </div>
         <div class="absolute bottom-0 left-0 w-full h-12 bg-[#fdf2f8]" style="border-radius: 50% 50% 0 0 / 100% 100% 0 0; transform: scaleX(1.5);"></div>
@@ -60,40 +67,40 @@
 
         <div id="product-list" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             
-            <div class="product-card bg-white p-4 rounded-3xl shadow-sm flex items-center border border-pink-50" data-name="base matte liquida" data-category="pele vendidos">
-                <img src="https://i.ibb.co/LST6S8v/makeup-base.jpg" class="w-24 h-24 rounded-2xl object-cover bg-pink-50">
+            <div class="product-card bg-white p-4 rounded-3xl shadow-sm flex items-center border border-pink-50" data-name="base matte liquida pele" data-category="pele vendidos">
+                <img src="https://i.ibb.co/LST6S8v/makeup-base.jpg" class="w-24 h-24 rounded-2xl object-cover bg-pink-50" onerror="this.src='https://via.placeholder.com/150?text=Shop+Mix'">
                 <div class="ml-4 flex-1">
                     <span class="bg-pink-100 text-pink-600 text-[8px] font-black px-2 py-0.5 rounded-full uppercase">Mais Vendido</span>
                     <h3 class="font-black text-sm text-gray-800">Base Matte Líquida</h3>
                     <p class="text-pink-600 font-bold text-xs mb-3">R$ 49,90</p>
                     <div class="flex gap-2">
                         <button class="p-2.5 bg-gray-50 text-pink-600 rounded-xl text-xs"><i class="fa-solid fa-play"></i></button>
-                        <button onclick="addToCart('Base Matte', 49.90)" class="flex-1 bg-pink-100 text-pink-700 text-[10px] font-black py-2.5 rounded-xl uppercase hover:bg-pink-200 transition">+ Adicionar</button>
+                        <button onclick="addToCart('Base Matte', 49.90)" class="flex-1 bg-pink-100 text-pink-700 text-[10px] font-black py-2.5 rounded-xl uppercase">+ Adicionar</button>
                     </div>
                 </div>
             </div>
 
-            <div class="product-card bg-white p-4 rounded-3xl shadow-sm flex items-center border border-pink-50" data-name="paleta sombras nude" data-category="olhos lancamentos">
-                <img src="https://i.ibb.co/0y48C7Yf/1000959799.jpg" class="w-24 h-24 rounded-2xl object-cover bg-pink-50">
+            <div class="product-card bg-white p-4 rounded-3xl shadow-sm flex items-center border border-pink-50" data-name="paleta sombras nude olhos" data-category="olhos lancamentos">
+                <img src="https://i.ibb.co/0y48C7Yf/1000959799.jpg" class="w-24 h-24 rounded-2xl object-cover bg-pink-50" onerror="this.src='https://via.placeholder.com/150?text=Shop+Mix'">
                 <div class="ml-4 flex-1">
                     <span class="bg-blue-100 text-blue-600 text-[8px] font-black px-2 py-0.5 rounded-full uppercase">Lançamento</span>
                     <h3 class="font-black text-sm text-gray-800">Paleta Sombras Nude</h3>
                     <p class="text-pink-600 font-bold text-xs mb-3">R$ 89,90</p>
                     <div class="flex gap-2">
                         <button class="p-2.5 bg-gray-50 text-pink-600 rounded-xl text-xs"><i class="fa-solid fa-play"></i></button>
-                        <button onclick="addToCart('Paleta Nude', 89.90)" class="flex-1 bg-pink-100 text-pink-700 text-[10px] font-black py-2.5 rounded-xl uppercase hover:bg-pink-200 transition">+ Adicionar</button>
+                        <button onclick="addToCart('Paleta Nude', 89.90)" class="flex-1 bg-pink-100 text-pink-700 text-[10px] font-black py-2.5 rounded-xl uppercase">+ Adicionar</button>
                     </div>
                 </div>
             </div>
 
             <div class="product-card bg-white p-4 rounded-3xl shadow-sm flex items-center border border-pink-50" data-name="perfume rose gold" data-category="perfume vendidos">
-                <img src="https://i.ibb.co/M9n0fXm/perfume.jpg" class="w-24 h-24 rounded-2xl object-cover bg-pink-50">
+                <img src="https://i.ibb.co/M9n0fXm/perfume.jpg" class="w-24 h-24 rounded-2xl object-cover bg-pink-50" onerror="this.src='https://via.placeholder.com/150?text=Shop+Mix'">
                 <div class="ml-4 flex-1">
                     <h3 class="font-black text-sm text-gray-800">Perfume Rose Gold</h3>
                     <p class="text-pink-600 font-bold text-xs mb-3">R$ 159,00</p>
                     <div class="flex gap-2">
                         <button class="p-2.5 bg-gray-50 text-pink-600 rounded-xl text-xs"><i class="fa-solid fa-play"></i></button>
-                        <button onclick="addToCart('Rose Gold', 159.00)" class="flex-1 bg-pink-100 text-pink-700 text-[10px] font-black py-2.5 rounded-xl uppercase hover:bg-pink-200 transition">+ Adicionar</button>
+                        <button onclick="addToCart('Rose Gold', 159.00)" class="flex-1 bg-pink-100 text-pink-700 text-[10px] font-black py-2.5 rounded-xl uppercase">+ Adicionar</button>
                     </div>
                 </div>
             </div>
@@ -102,25 +109,25 @@
     </main>
 
     <div id="cart-btn" class="fixed bottom-6 right-6 z-50 hidden">
-        <button onclick="toggleCartModal()" class="pink-gradient text-white w-16 h-16 rounded-full shadow-2xl flex items-center justify-center relative border-4 border-white active:scale-90 transition">
+        <button onclick="toggleCartModal()" class="pink-gradient text-white w-16 h-16 rounded-full shadow-2xl flex items-center justify-center relative border-4 border-white active:scale-95 transition">
             <i class="fa-solid fa-cart-shopping text-xl"></i>
-            <span id="cart-count" class="absolute -top-1 -right-1 bg-black text-white text-xs font-bold w-6 h-6 rounded-full flex items-center justify-center border-2 border-white">0</span>
+            <span id="cart-count" class="absolute -top-1 -right-1 bg-black text-white text-[10px] font-bold w-7 h-7 rounded-full flex items-center justify-center border-2 border-white">0</span>
         </button>
     </div>
 
     <div id="cart-modal" class="fixed inset-0 bg-black/60 z-[60] hidden flex items-end justify-center">
-        <div class="bg-white w-full max-w-lg rounded-t-[40px] p-8 max-h-[85vh] overflow-y-auto shadow-2xl">
+        <div class="bg-white w-full max-w-lg rounded-t-[40px] p-8 max-h-[85vh] overflow-y-auto">
             <div class="flex justify-between items-center mb-6">
-                <h2 class="text-xl font-black text-gray-800 uppercase tracking-tight">Meu Carrinho</h2>
-                <button onclick="toggleCartModal()" class="text-gray-300 text-4xl">&times;</button>
+                <h2 class="text-xl font-black text-gray-800">MEU PEDIDO</h2>
+                <button onclick="toggleCartModal()" class="text-gray-400 text-3xl p-2">&times;</button>
             </div>
-            <div id="cart-items" class="space-y-4 mb-8"></div>
+            <div id="cart-items" class="space-y-4 mb-6"></div>
             <div class="border-t pt-6">
-                <div class="flex justify-between font-black text-lg mb-6 text-gray-800">
+                <div class="flex justify-between font-black text-lg mb-6">
                     <span>Total:</span>
                     <span id="cart-total" class="text-pink-600">R$ 0,00</span>
                 </div>
-                <button onclick="sendWhatsApp()" class="w-full pink-gradient text-white py-5 rounded-3xl font-black uppercase tracking-widest shadow-xl hover:opacity-90 transition">Finalizar Pedido</button>
+                <button onclick="sendWhatsApp()" class="w-full pink-gradient text-white py-5 rounded-3xl font-black uppercase tracking-widest shadow-xl">Finalizar no WhatsApp</button>
             </div>
         </div>
     </div>
@@ -143,7 +150,7 @@
             document.getElementById('cart-items').innerHTML = cart.map((i, idx) => `
                 <div class="flex justify-between items-center bg-gray-50 p-4 rounded-2xl">
                     <div><p class="font-bold text-sm text-gray-800">${i.name}</p><p class="text-xs text-pink-500 font-bold">${i.qty}x R$ ${i.price.toFixed(2).replace('.',',')}</p></div>
-                    <button onclick="removeItem(${idx})" class="text-red-400 p-2"><i class="fa-solid fa-trash"></i></button>
+                    <button onclick="removeItem(${idx})" class="text-red-400 px-2"><i class="fa-solid fa-trash"></i></button>
                 </div>`).join('');
         }
 
@@ -165,7 +172,7 @@
         }
 
         function sendWhatsApp() {
-            let m = "*🛒 NOVO PEDIDO - SHOP MIX IPUÃ*\n\n" + cart.map(i => `✅ *${i.qty}x* ${i.name}`).join('\n') + `\n\n*TOTAL: ${document.getElementById('cart-total').innerText}*\n\nOlá! Gostaria de finalizar minha compra. 😊`;
+            let m = "*🛒 NOVO PEDIDO - SHOP MIX IPUÃ*\n\n" + cart.map(i => `✅ *${i.qty}x* ${i.name}`).join('\n') + `\n\n*TOTAL: ${document.getElementById('cart-total').innerText}*`;
             window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(m)}`);
         }
     </script>
