@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shop Mix - Catálogo com Vídeo</title>
+    <title>Shop Mix - Catálogo Realista</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     
@@ -13,12 +13,11 @@
         .pink-gradient { background: linear-gradient(135deg, #f472b6, #db2777); }
         .glass { background: rgba(255, 255, 255, 0.7); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.4); }
         .no-scrollbar::-webkit-scrollbar { display: none; }
-        .category-btn.active { background: #db2777; color: white; border-color: #db2777; }
-        
-        /* Estilo para o Modal de Vídeo */
-        #video-modal { z-index: 10001; }
-        .video-container { position: relative; padding-bottom: 177.77%; height: 0; overflow: hidden; border-radius: 20px; }
-        .video-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        .category-btn.active { background: #db2777; color: white; border-color: #db2777; box-shadow: 0 4px 12px rgba(219, 39, 119, 0.3); }
+        .hidden { display: none !important; }
+        #cart-count { animation: pop 0.3s ease-out; }
+        @keyframes pop { 0% { transform: scale(1); } 50% { transform: scale(1.4); } 100% { transform: scale(1); } }
     </style>
 </head>
 <body>
@@ -32,19 +31,20 @@
 
         <div class="px-6 mb-6 relative z-20">
             <div class="relative max-w-md mx-auto">
-                <input type="text" id="search-input" onkeyup="filterProducts()" placeholder="O que você procura hoje?" class="w-full py-3 px-12 rounded-2xl border-none shadow-xl outline-none text-sm text-gray-700">
+                <input type="text" id="search-input" onkeyup="filterProducts()" placeholder="O que você procura hoje?" 
+                class="w-full py-3 px-12 rounded-2xl border-none shadow-xl outline-none text-sm text-gray-700">
                 <i class="fa-solid fa-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-pink-400"></i>
             </div>
         </div>
 
         <div class="px-6 flex justify-center gap-3 relative z-20">
-            <a href="#" class="glass px-5 py-2 rounded-2xl shadow-md flex items-center gap-2">
+            <a href="https://www.instagram.com/shopmixipua/" target="_blank" class="glass px-5 py-2 rounded-2xl shadow-md flex items-center gap-2">
                 <i class="fa-brands fa-instagram text-pink-600"></i>
                 <span class="text-[10px] font-black uppercase text-pink-900">Instagram</span>
             </a>
             <a href="https://wa.me/5516999999999" class="glass px-5 py-2 rounded-2xl shadow-md flex items-center gap-2 text-green-600">
                 <i class="fa-brands fa-whatsapp"></i>
-                <span class="text-[10px] font-black uppercase text-pink-900">WhatsApp</span>
+                <span class="text-[10px] font-black uppercase text-pink-900">whatsaap</span>
             </a>
         </div>
         <div class="absolute bottom-0 left-0 w-full h-12 bg-[#fdf2f8]" style="border-radius: 50% 50% 0 0 / 100% 100% 0 0; transform: scaleX(1.5);"></div>
@@ -53,35 +53,80 @@
     <main class="px-6 -mt-4 relative z-30">
         <div class="flex gap-2 overflow-x-auto pb-6 no-scrollbar">
             <button onclick="filterCategory('todos', this)" class="category-btn active border border-pink-100 bg-white text-pink-600 px-6 py-2.5 rounded-full text-xs font-bold whitespace-nowrap shadow-sm">✨ Todos</button>
+            <button onclick="filterCategory('lancamentos', this)" class="category-btn border border-pink-100 bg-white text-pink-600 px-6 py-2.5 rounded-full text-xs font-bold whitespace-nowrap shadow-sm">🚀 Lançamentos</button>
+            <button onclick="filterCategory('vendidos', this)" class="category-btn border border-pink-100 bg-white text-pink-600 px-6 py-2.5 rounded-full text-xs font-bold whitespace-nowrap shadow-sm">🔥 Mais Vendidos</button>
             <button onclick="filterCategory('pele', this)" class="category-btn border border-pink-100 bg-white text-pink-600 px-6 py-2.5 rounded-full text-xs font-bold whitespace-nowrap shadow-sm">🧴 Pele</button>
+            <button onclick="filterCategory('olhos', this)" class="category-btn border border-pink-100 bg-white text-pink-600 px-6 py-2.5 rounded-full text-xs font-bold whitespace-nowrap shadow-sm">👁️ Olhos</button>
+            <button onclick="filterCategory('perfume', this)" class="category-btn border border-pink-100 bg-white text-pink-600 px-6 py-2.5 rounded-full text-xs font-bold whitespace-nowrap shadow-sm">🌸 Perfumes</button>
         </div>
 
         <div id="product-list" class="space-y-4">
+            
             <div class="product-card bg-white p-3 rounded-3xl shadow-sm flex items-center border border-pink-50" data-name="base matte liquida" data-category="pele vendidos">
                 <img src="https://images.unsplash.com/photo-1596704017254-9b121068fb31?w=300" class="w-20 h-20 rounded-2xl object-cover">
                 <div class="ml-4 flex-1">
-                    <span class="bg-pink-100 text-pink-600 text-[8px] font-black px-2 py-0.5 rounded-full uppercase">Com Vídeo</span>
-                    <h3 class="font-black text-sm text-gray-800 uppercase italic">Base Matte Líquida</h3>
+                    <span class="bg-pink-100 text-pink-600 text-[8px] font-black px-2 py-0.5 rounded-full uppercase">Mais Vendido</span>
+                    <h3 class="font-black text-sm text-gray-800">Base Matte Líquida</h3>
                     <p class="text-pink-600 font-bold text-xs mb-2">R$ 49,90</p>
                     <div class="flex gap-2">
-                        <button onclick="openVideo('https://www.youtube.com/embed/dQw4w9WgXcQ')" class="p-2.5 bg-pink-600 text-white rounded-xl text-xs shadow-lg animate-pulse">
-                            <i class="fa-solid fa-play"></i> Ver Review
-                        </button>
+                        <button onclick="openVideo('...')" class="p-2.5 bg-gray-50 text-pink-600 rounded-xl text-xs"><i class="fa-solid fa-play"></i></button>
                         <button onclick="addToCart('Base Matte', 49.90)" class="flex-1 bg-pink-100 text-pink-700 text-[10px] font-black py-2.5 rounded-xl uppercase">+ Adicionar</button>
                     </div>
                 </div>
             </div>
+
+            <div class="product-card bg-white p-3 rounded-3xl shadow-sm flex items-center border border-pink-50" data-name="paleta sombras nude" data-category="olhos lancamentos">
+                <img src="https://images.unsplash.com/photo-1512496011216-36838383838388?w=300" class="w-20 h-20 rounded-2xl object-cover">
+                <div class="ml-4 flex-1">
+                    <span class="bg-blue-100 text-blue-600 text-[8px] font-black px-2 py-0.5 rounded-full uppercase">Lançamento</span>
+                    <h3 class="font-black text-sm text-gray-800">Paleta Sombras Nude</h3>
+                    <p class="text-pink-600 font-bold text-xs mb-2">R$ 89,90</p>
+                    <div class="flex gap-2">
+                        <button onclick="openVideo('...')" class="p-2.5 bg-gray-50 text-pink-600 rounded-xl text-xs"><i class="fa-solid fa-play"></i></button>
+                        <button onclick="addToCart('Paleta Nude', 89.90)" class="flex-1 bg-pink-100 text-pink-700 text-[10px] font-black py-2.5 rounded-xl uppercase">+ Adicionar</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="product-card bg-white p-3 rounded-3xl shadow-sm flex items-center border border-pink-50" data-name="perfume rose gold" data-category="perfume vendidos">
+                <img src="https://images.unsplash.com/photo-1544467329-33752e6a9f5c?w=300" class="w-20 h-20 rounded-2xl object-cover">
+                <div class="ml-4 flex-1">
+                    <h3 class="font-black text-sm text-gray-800">Perfume Rose Gold</h3>
+                    <p class="text-pink-600 font-bold text-xs mb-2">R$ 159,00</p>
+                    <div class="flex gap-2">
+                        <button onclick="openVideo('...')" class="p-2.5 bg-gray-50 text-pink-600 rounded-xl text-xs"><i class="fa-solid fa-play"></i></button>
+                        <button onclick="addToCart('Rose Gold', 159.00)" class="flex-1 bg-pink-100 text-pink-700 text-[10px] font-black py-2.5 rounded-xl uppercase">+ Adicionar</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="product-card bg-white p-3 rounded-3xl shadow-sm flex items-center border border-pink-50" data-name="serum facial vitamina c" data-category="pele lancamentos">
+                <img src="https://images.unsplash.com/photo-1620916566398-39f1143ab7be?w=300" class="w-20 h-20 rounded-2xl object-cover">
+                <div class="ml-4 flex-1">
+                    <span class="bg-blue-100 text-blue-600 text-[8px] font-black px-2 py-0.5 rounded-full uppercase">Lançamento</span>
+                    <h3 class="font-black text-sm text-gray-800">Sérum Vitamina C</h3>
+                    <p class="text-pink-600 font-bold text-xs mb-2">R$ 65,00</p>
+                    <div class="flex gap-2">
+                        <button onclick="openVideo('...')" class="p-2.5 bg-gray-50 text-pink-600 rounded-xl text-xs"><i class="fa-solid fa-play"></i></button>
+                        <button onclick="addToCart('Sérum Vit C', 65.00)" class="flex-1 bg-pink-100 text-pink-700 text-[10px] font-black py-2.5 rounded-xl uppercase">+ Adicionar</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="product-card bg-white p-3 rounded-3xl shadow-sm flex items-center border border-pink-50" data-name="delineador caneta preto" data-category="olhos">
+                <img src="https://images.unsplash.com/photo-1625093748303-2475a906745d?w=300" class="w-20 h-20 rounded-2xl object-cover">
+                <div class="ml-4 flex-1">
+                    <h3 class="font-black text-sm text-gray-800">Delineador Caneta</h3>
+                    <p class="text-pink-600 font-bold text-xs mb-2">R$ 22,00</p>
+                    <div class="flex gap-2">
+                        <button onclick="openVideo('...')" class="p-2.5 bg-gray-50 text-pink-600 rounded-xl text-xs"><i class="fa-solid fa-play"></i></button>
+                        <button onclick="addToCart('Delineador', 22.00)" class="flex-1 bg-pink-100 text-pink-700 text-[10px] font-black py-2.5 rounded-xl uppercase">+ Adicionar</button>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </main>
-
-    <div id="video-modal" class="fixed inset-0 bg-black/90 hidden flex items-center justify-center p-6">
-        <div class="w-full max-w-sm relative">
-            <button onclick="closeVideo()" class="absolute -top-12 right-0 text-white text-4xl">&times;</button>
-            <div class="video-container">
-                <iframe id="video-frame" src="" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-            </div>
-        </div>
-    </div>
 
     <div id="cart-btn" class="fixed bottom-6 right-6 z-50 hidden">
         <button onclick="toggleCartModal()" class="pink-gradient text-white w-16 h-16 rounded-full shadow-2xl flex items-center justify-center relative border-4 border-white">
@@ -90,22 +135,27 @@
         </button>
     </div>
 
+    <div id="cart-modal" class="fixed inset-0 bg-black/60 z-[60] hidden flex items-end">
+        <div class="bg-white w-full rounded-t-[40px] p-8 max-h-[85vh] overflow-y-auto">
+            <div class="flex justify-between items-center mb-6">
+                <h2 class="text-xl font-black text-gray-800">Meu Pedido</h2>
+                <button onclick="toggleCartModal()" class="text-gray-400 text-3xl">&times;</button>
+            </div>
+            <div id="cart-items" class="space-y-4 mb-6"></div>
+            <div class="border-t pt-6">
+                <div class="flex justify-between font-black text-lg mb-6">
+                    <span>Total:</span>
+                    <span id="cart-total" class="text-pink-600">R$ 0,00</span>
+                </div>
+                <button onclick="sendWhatsApp()" class="w-full pink-gradient text-white py-5 rounded-3xl font-black uppercase tracking-widest shadow-xl">Finalizar no WhatsApp</button>
+            </div>
+        </div>
+    </div>
+
     <script>
         let cart = [];
         const WHATSAPP_NUMBER = '5516999999999';
 
-        // FUNÇÕES DO VÍDEO
-        function openVideo(url) {
-            document.getElementById('video-frame').src = url;
-            document.getElementById('video-modal').classList.remove('hidden');
-        }
-
-        function closeVideo() {
-            document.getElementById('video-frame').src = "";
-            document.getElementById('video-modal').classList.add('hidden');
-        }
-
-        // FUNÇÕES DO CARRINHO (Suas funções originais)
         function addToCart(name, price) {
             const index = cart.findIndex(i => i.name === name);
             if (index > -1) cart[index].qty++; else cart.push({ name, price, qty: 1 });
@@ -116,9 +166,22 @@
         function updateUI() {
             const total = cart.reduce((acc, i) => acc + (i.price * i.qty), 0);
             document.getElementById('cart-count').innerText = cart.reduce((acc, i) => acc + i.qty, 0);
+            document.getElementById('cart-total').innerText = `R$ ${total.toFixed(2).replace('.',',')}`;
+            document.getElementById('cart-items').innerHTML = cart.map((i, idx) => `
+                <div class="flex justify-between bg-gray-50 p-4 rounded-2xl">
+                    <div><p class="font-bold text-sm text-gray-800">${i.name}</p><p class="text-xs text-pink-500">${i.qty}x R$ ${i.price.toFixed(2)}</p></div>
+                    <button onclick="removeItem(${idx})" class="text-red-400 px-2"><i class="fa-solid fa-trash"></i></button>
+                </div>`).join('');
         }
 
-        function toggleCartModal() { /* sua lógica de fechar/abrir */ }
+        function removeItem(idx) { cart.splice(idx, 1); updateUI(); if(cart.length === 0) { document.getElementById('cart-btn').classList.add('hidden'); toggleCartModal(); } }
+        function toggleCartModal() { document.getElementById('cart-modal').classList.toggle('hidden'); }
+        
+        function filterProducts() {
+            const t = document.getElementById('search-input').value.toLowerCase();
+            document.querySelectorAll('.product-card').forEach(c => c.classList.toggle('hidden', !c.getAttribute('data-name').includes(t)));
+        }
+
         function filterCategory(cat, btn) {
             document.querySelectorAll('.category-btn').forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
@@ -126,6 +189,11 @@
                 const itemCats = c.getAttribute('data-category').split(' ');
                 c.classList.toggle('hidden', cat !== 'todos' && !itemCats.includes(cat));
             });
+        }
+
+        function sendWhatsApp() {
+            let m = "*Pedido Shop Mix Ipuã*\n\n" + cart.map(i => `✅ ${i.qty}x ${i.name}`).join('\n') + `\n\n*Total: ${document.getElementById('cart-total').innerText}*`;
+            window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(m)}`);
         }
     </script>
 </body>
