@@ -8,21 +8,35 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap');
-        body { font-family: 'Inter', sans-serif; background-color: #fdf2f8; padding-bottom: 100px; }
+        body { font-family: 'Inter', sans-serif; background-color: #fdf2f8; padding-bottom: 120px; }
         .pink-gradient { background: linear-gradient(135deg, #f472b6, #db2777); }
+        .glass { background: rgba(255, 255, 255, 0.7); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.4); }
         .no-scrollbar::-webkit-scrollbar { display: none; }
         .category-btn.active { background: #db2777 !important; color: white !important; }
-        .product-card img { transition: opacity 0.3s; }
+        /* Garante que o carrinho fique sempre por cima de tudo */
+        #cart-btn { z-index: 999; }
+        #cart-modal { z-index: 1000; }
     </style>
 </head>
 <body>
 
-    <header class="pink-gradient pt-10 pb-16 text-center relative shadow-lg">
+    <header class="pink-gradient pt-10 pb-20 text-center relative shadow-lg">
         <div class="w-24 h-24 bg-black rounded-full mx-auto border-4 border-white overflow-hidden mb-3 relative z-20 shadow-xl">
             <img src="https://i.ibb.co/JMx6RKd/1000959503.jpg" class="w-full h-full object-cover">
         </div>
         <h1 class="text-white text-xl font-black uppercase tracking-tighter relative z-20">Shopping Mix</h1>
         <p class="text-pink-100 text-[10px] font-bold uppercase relative z-20 mb-6">Consultoria de Beleza • Ipuã</p>
+
+        <div class="px-6 flex justify-center gap-3 relative z-20 mb-6">
+            <a href="https://www.instagram.com/shopmixipua/" target="_blank" class="glass px-4 py-2 rounded-2xl shadow-md flex items-center gap-2">
+                <i class="fa-brands fa-instagram text-pink-600"></i>
+                <span class="text-[10px] font-black uppercase text-pink-900">Instagram</span>
+            </a>
+            <a href="https://wa.me/5516999999999" target="_blank" class="glass px-4 py-2 rounded-2xl shadow-md flex items-center gap-2">
+                <i class="fa-brands fa-whatsapp text-green-600"></i>
+                <span class="text-[10px] font-black uppercase text-pink-900">WhatsApp</span>
+            </a>
+        </div>
 
         <div class="px-6 relative z-20 max-w-md mx-auto">
             <input type="text" id="search-input" onkeyup="filterProducts()" placeholder="Buscar produto..." 
@@ -30,7 +44,7 @@
         </div>
     </header>
 
-    <main class="max-w-6xl mx-auto px-4 -mt-6 relative z-30">
+    <main class="max-w-6xl mx-auto px-4 -mt-8 relative z-10">
         <div class="flex gap-2 overflow-x-auto pb-6 no-scrollbar">
             <button onclick="filterCategory('todos', this)" class="category-btn active bg-white text-pink-600 px-6 py-2 rounded-full text-xs font-bold shadow-sm whitespace-nowrap">✨ Todos</button>
             <button onclick="filterCategory('lancamentos', this)" class="category-btn bg-white text-pink-600 px-6 py-2 rounded-full text-xs font-bold shadow-sm whitespace-nowrap">🚀 Lançamentos</button>
@@ -44,50 +58,53 @@
             <div class="product-card bg-white p-4 rounded-3xl shadow-md flex items-center" data-name="base matte liquida pele" data-category="pele vendidos">
                 <img src="https://picsum.photos/id/20/300/300" class="w-20 h-20 rounded-2xl object-cover bg-pink-50" onerror="this.src='https://via.placeholder.com/300?text=Shop+Mix'">
                 <div class="ml-4 flex-1">
-                    <h3 class="font-black text-sm text-gray-800">Base Matte Líquida</h3>
+                    <h3 class="font-black text-sm text-gray-800 uppercase italic">Base Matte</h3>
                     <p class="text-pink-600 font-bold text-xs">R$ 49,90</p>
-                    <button onclick="addToCart('Base Matte', 49.90)" class="mt-2 w-full bg-pink-100 text-pink-700 text-[10px] font-black py-2 rounded-xl uppercase hover:bg-pink-200 transition">+ Adicionar</button>
+                    <button onclick="addToCart('Base Matte', 49.90)" class="mt-2 w-full bg-pink-100 text-pink-700 text-[10px] font-black py-2 rounded-xl uppercase">+ Adicionar</button>
                 </div>
             </div>
 
             <div class="product-card bg-white p-4 rounded-3xl shadow-md flex items-center" data-name="paleta sombras nude olhos" data-category="olhos lancamentos">
-                <img src="https://i.ibb.co/0y48C7Yf/1000959799.jpg" class="w-20 h-20 rounded-2xl object-cover bg-pink-50" onerror="this.src='https://via.placeholder.com/300?text=Shop+Mix'">
+                <img src="https://i.ibb.co/0y48C7Yf/1000959799.jpg" class="w-20 h-20 rounded-2xl object-cover bg-pink-50">
                 <div class="ml-4 flex-1">
-                    <h3 class="font-black text-sm text-gray-800">Paleta Sombras Nude</h3>
+                    <h3 class="font-black text-sm text-gray-800 uppercase italic">Paleta de Sombras</h3>
                     <p class="text-pink-600 font-bold text-xs">R$ 89,90</p>
-                    <button onclick="addToCart('Paleta Nude', 89.90)" class="mt-2 w-full bg-pink-100 text-pink-700 text-[10px] font-black py-2 rounded-xl uppercase hover:bg-pink-200 transition">+ Adicionar</button>
+                    <button onclick="addToCart('Paleta de Sombras', 89.90)" class="mt-2 w-full bg-pink-100 text-pink-700 text-[10px] font-black py-2 rounded-xl uppercase">+ Adicionar</button>
                 </div>
             </div>
 
             <div class="product-card bg-white p-4 rounded-3xl shadow-md flex items-center" data-name="perfume rose gold" data-category="perfume vendidos">
-                <img src="https://picsum.photos/id/30/300/300" class="w-20 h-20 rounded-2xl object-cover bg-pink-50" onerror="this.src='https://via.placeholder.com/300?text=Shop+Mix'">
+                <img src="https://picsum.photos/id/30/300/300" class="w-20 h-20 rounded-2xl object-cover bg-pink-50">
                 <div class="ml-4 flex-1">
-                    <h3 class="font-black text-sm text-gray-800">Perfume Rose Gold</h3>
+                    <h3 class="font-black text-sm text-gray-800 uppercase italic">Perfume Rose</h3>
                     <p class="text-pink-600 font-bold text-xs">R$ 159,00</p>
-                    <button onclick="addToCart('Rose Gold', 159.00)" class="mt-2 w-full bg-pink-100 text-pink-700 text-[10px] font-black py-2 rounded-xl uppercase hover:bg-pink-200 transition">+ Adicionar</button>
+                    <button onclick="addToCart('Perfume Rose', 159.00)" class="mt-2 w-full bg-pink-100 text-pink-700 text-[10px] font-black py-2 rounded-xl uppercase">+ Adicionar</button>
                 </div>
             </div>
 
         </div>
     </main>
 
-    <div id="cart-btn" class="fixed bottom-6 right-6 hidden">
-        <button onclick="toggleCartModal()" class="pink-gradient text-white w-14 h-14 rounded-full shadow-2xl flex items-center justify-center relative border-2 border-white">
-            <i class="fa-solid fa-cart-shopping"></i>
-            <span id="cart-count" class="absolute -top-1 -right-1 bg-black text-white text-[10px] w-6 h-6 rounded-full flex items-center justify-center">0</span>
+    <div id="cart-btn" class="fixed bottom-8 right-8 hidden">
+        <button onclick="toggleCartModal()" class="pink-gradient text-white w-16 h-16 rounded-full shadow-2xl flex items-center justify-center relative border-4 border-white active:scale-90 transition">
+            <i class="fa-solid fa-cart-shopping text-xl"></i>
+            <span id="cart-count" class="absolute -top-1 -right-1 bg-black text-white text-[10px] font-bold w-7 h-7 rounded-full flex items-center justify-center border-2 border-white">0</span>
         </button>
     </div>
 
-    <div id="cart-modal" class="fixed inset-0 bg-black/50 z-[100] hidden flex items-end">
-        <div class="bg-white w-full rounded-t-3xl p-6 max-h-[80vh] overflow-y-auto">
-            <div class="flex justify-between items-center mb-4">
-                <h2 class="font-black text-gray-800">MEU PEDIDO</h2>
-                <button onclick="toggleCartModal()" class="text-2xl text-gray-400">&times;</button>
+    <div id="cart-modal" class="fixed inset-0 bg-black/60 hidden flex items-end justify-center">
+        <div class="bg-white w-full max-w-lg rounded-t-[40px] p-8 max-h-[85vh] overflow-y-auto shadow-2xl">
+            <div class="flex justify-between items-center mb-6">
+                <h2 class="text-xl font-black text-gray-800 uppercase tracking-tighter">Meu Pedido</h2>
+                <button onclick="toggleCartModal()" class="text-gray-400 text-4xl">&times;</button>
             </div>
-            <div id="cart-items" class="space-y-3 mb-6"></div>
-            <div class="border-t pt-4">
-                <div class="flex justify-between font-black mb-4"><span>Total:</span><span id="cart-total" class="text-pink-600">R$ 0,00</span></div>
-                <button onclick="sendWhatsApp()" class="w-full pink-gradient text-white py-4 rounded-2xl font-black uppercase">Finalizar WhatsApp</button>
+            <div id="cart-items" class="space-y-4 mb-8"></div>
+            <div class="border-t pt-6">
+                <div class="flex justify-between font-black text-lg mb-6">
+                    <span>Total:</span>
+                    <span id="cart-total" class="text-pink-600">R$ 0,00</span>
+                </div>
+                <button onclick="sendWhatsApp()" class="w-full pink-gradient text-white py-5 rounded-3xl font-black uppercase tracking-widest shadow-xl">Finalizar no WhatsApp</button>
             </div>
         </div>
     </div>
@@ -108,9 +125,9 @@
             document.getElementById('cart-count').innerText = cart.reduce((acc, i) => acc + i.qty, 0);
             document.getElementById('cart-total').innerText = `R$ ${total.toFixed(2).replace('.',',')}`;
             document.getElementById('cart-items').innerHTML = cart.map((i, idx) => `
-                <div class="flex justify-between items-center bg-gray-50 p-3 rounded-xl">
-                    <div class="text-xs"><b>${i.name}</b><br>${i.qty}x R$ ${i.price.toFixed(2)}</div>
-                    <button onclick="removeItem(${idx})" class="text-red-400"><i class="fa-solid fa-trash"></i></button>
+                <div class="flex justify-between items-center bg-gray-50 p-4 rounded-2xl">
+                    <div class="text-sm italic font-bold text-gray-800">${i.qty}x ${i.name}</div>
+                    <button onclick="removeItem(${idx})" class="text-red-400 p-2"><i class="fa-solid fa-trash"></i></button>
                 </div>`).join('');
         }
 
@@ -129,7 +146,7 @@
             });
         }
         function sendWhatsApp() {
-            const m = `*Pedido Shop Mix*\n\n` + cart.map(i => `✅ ${i.qty}x ${i.name}`).join('\n') + `\n\n*Total: ${document.getElementById('cart-total').innerText}*`;
+            const m = `*NOVO PEDIDO - SHOP MIX IPUÃ*\n\n` + cart.map(i => `✅ *${i.qty}x* ${i.name}`).join('\n') + `\n\n*TOTAL: ${document.getElementById('cart-total').innerText}*`;
             window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(m)}`);
         }
     </script>
