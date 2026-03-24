@@ -9,18 +9,35 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap');
         body { font-family: 'Inter', sans-serif; background-color: #fdf2f8; padding-bottom: 120px; }
-        .pink-gradient { background: linear-gradient(135deg, #f472b6, #db2777); }
+        
+        /* Efeito de Arco no Cabeçalho */
+        .header-arc {
+            background: linear-gradient(135deg, #f472b6, #db2777);
+            border-bottom-left-radius: 50% 20%;
+            border-bottom-right-radius: 50% 20%;
+            padding-bottom: 60px;
+        }
+
         .glass { background: rgba(255, 255, 255, 0.7); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.4); }
         .no-scrollbar::-webkit-scrollbar { display: none; }
         .category-btn.active { background: #db2777 !important; color: white !important; }
-        /* Garante que o carrinho fique sempre por cima de tudo */
-        #cart-btn { z-index: 999; }
-        #cart-modal { z-index: 1000; }
+        
+        /* Cards com Sombreado Suave */
+        .product-card {
+            background: white;
+            border-radius: 24px;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+            transition: transform 0.2s;
+        }
+        
+        /* Z-Index para o Carrinho ficar na frente */
+        #cart-btn { z-index: 9999; }
+        #cart-modal { z-index: 10000; }
     </style>
 </head>
 <body>
 
-    <header class="pink-gradient pt-10 pb-20 text-center relative shadow-lg">
+    <header class="header-arc pt-10 text-center relative shadow-lg">
         <div class="w-24 h-24 bg-black rounded-full mx-auto border-4 border-white overflow-hidden mb-3 relative z-20 shadow-xl">
             <img src="https://i.ibb.co/JMx6RKd/1000959503.jpg" class="w-full h-full object-cover">
         </div>
@@ -28,57 +45,59 @@
         <p class="text-pink-100 text-[10px] font-bold uppercase relative z-20 mb-6">Consultoria de Beleza • Ipuã</p>
 
         <div class="px-6 flex justify-center gap-3 relative z-20 mb-6">
-            <a href="https://www.instagram.com/shopmixipua/" target="_blank" class="glass px-4 py-2 rounded-2xl shadow-md flex items-center gap-2">
+            <a href="https://www.instagram.com/shopmixipua/" target="_blank" class="glass px-6 py-2 rounded-2xl shadow-md flex items-center gap-2">
                 <i class="fa-brands fa-instagram text-pink-600"></i>
-                <span class="text-[10px] font-black uppercase text-pink-900">Instagram</span>
+                <span class="text-[10px] font-black uppercase text-pink-900 font-bold">Instagram</span>
             </a>
-            <a href="https://wa.me/5516999999999" target="_blank" class="glass px-4 py-2 rounded-2xl shadow-md flex items-center gap-2">
+            <a href="https://wa.me/5516999999999" target="_blank" class="glass px-6 py-2 rounded-2xl shadow-md flex items-center gap-2">
                 <i class="fa-brands fa-whatsapp text-green-600"></i>
-                <span class="text-[10px] font-black uppercase text-pink-900">WhatsApp</span>
+                <span class="text-[10px] font-black uppercase text-pink-900 font-bold">Consultoria</span>
             </a>
         </div>
 
-        <div class="px-6 relative z-20 max-w-md mx-auto">
-            <input type="text" id="search-input" onkeyup="filterProducts()" placeholder="Buscar produto..." 
-            class="w-full py-3 px-6 rounded-2xl border-none shadow-lg outline-none text-sm">
+        <div class="px-6 relative z-20 max-w-md mx-auto mb-4">
+            <div class="relative">
+                <input type="text" id="search-input" onkeyup="filterProducts()" placeholder="O que você procura hoje?" 
+                class="w-full py-3 px-12 rounded-2xl border-none shadow-xl outline-none text-sm text-gray-700">
+                <i class="fa-solid fa-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-pink-400"></i>
+            </div>
         </div>
     </header>
 
-    <main class="max-w-6xl mx-auto px-4 -mt-8 relative z-10">
-        <div class="flex gap-2 overflow-x-auto pb-6 no-scrollbar">
-            <button onclick="filterCategory('todos', this)" class="category-btn active bg-white text-pink-600 px-6 py-2 rounded-full text-xs font-bold shadow-sm whitespace-nowrap">✨ Todos</button>
-            <button onclick="filterCategory('lancamentos', this)" class="category-btn bg-white text-pink-600 px-6 py-2 rounded-full text-xs font-bold shadow-sm whitespace-nowrap">🚀 Lançamentos</button>
-            <button onclick="filterCategory('vendidos', this)" class="category-btn bg-white text-pink-600 px-6 py-2 rounded-full text-xs font-bold shadow-sm whitespace-nowrap">🔥 Mais Vendidos</button>
-            <button onclick="filterCategory('pele', this)" class="category-btn bg-white text-pink-600 px-6 py-2 rounded-full text-xs font-bold shadow-sm whitespace-nowrap">🧴 Pele</button>
-            <button onclick="filterCategory('olhos', this)" class="category-btn bg-white text-pink-600 px-6 py-2 rounded-full text-xs font-bold shadow-sm whitespace-nowrap">👁️ Olhos</button>
+    <main class="max-w-6xl mx-auto px-4 -mt-8 relative z-30">
+        <div class="flex gap-2 overflow-x-auto pb-8 no-scrollbar">
+            <button onclick="filterCategory('todos', this)" class="category-btn active border border-pink-100 bg-white text-pink-600 px-6 py-2.5 rounded-full text-xs font-bold whitespace-nowrap shadow-sm">✨ Todos</button>
+            <button onclick="filterCategory('pele', this)" class="category-btn border border-pink-100 bg-white text-pink-600 px-6 py-2.5 rounded-full text-xs font-bold whitespace-nowrap shadow-sm">🧴 Pele</button>
+            <button onclick="filterCategory('olhos', this)" class="category-btn border border-pink-100 bg-white text-pink-600 px-6 py-2.5 rounded-full text-xs font-bold whitespace-nowrap shadow-sm">👁️ Olhos</button>
         </div>
 
-        <div id="product-list" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div id="product-list" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             
-            <div class="product-card bg-white p-4 rounded-3xl shadow-md flex items-center" data-name="base matte liquida pele" data-category="pele vendidos">
-                <img src="https://picsum.photos/id/20/300/300" class="w-20 h-20 rounded-2xl object-cover bg-pink-50" onerror="this.src='https://via.placeholder.com/300?text=Shop+Mix'">
-                <div class="ml-4 flex-1">
-                    <h3 class="font-black text-sm text-gray-800 uppercase italic">Base Matte</h3>
-                    <p class="text-pink-600 font-bold text-xs">R$ 49,90</p>
-                    <button onclick="addToCart('Base Matte', 49.90)" class="mt-2 w-full bg-pink-100 text-pink-700 text-[10px] font-black py-2 rounded-xl uppercase">+ Adicionar</button>
+            <div class="product-card p-4 flex items-center gap-4" data-name="base matte shop mix pele" data-category="pele">
+                <div class="w-24 h-24 bg-gray-50 rounded-2xl overflow-hidden flex-shrink-0">
+                    <img src="https://i.ibb.co/LST6S8v/makeup-base.jpg" class="w-full h-full object-cover" onerror="this.src='https://via.placeholder.com/300?text=Shop+Mix'">
+                </div>
+                <div class="flex-1">
+                    <h3 class="font-black text-sm text-gray-800">Base Matte Shop Mix</h3>
+                    <p class="text-pink-600 font-bold text-xs mb-3">R$ 49,90</p>
+                    <div class="flex gap-2">
+                        <button class="p-2.5 bg-pink-50 text-pink-600 rounded-xl text-xs"><i class="fa-solid fa-play"></i></button>
+                        <button onclick="addToCart('Base Matte', 49.90)" class="flex-1 bg-pink-50 text-pink-700 text-[10px] font-black py-2.5 rounded-xl uppercase">+ Adicionar</button>
+                    </div>
                 </div>
             </div>
 
-            <div class="product-card bg-white p-4 rounded-3xl shadow-md flex items-center" data-name="paleta sombras nude olhos" data-category="olhos lancamentos">
-                <img src="https://i.ibb.co/0y48C7Yf/1000959799.jpg" class="w-20 h-20 rounded-2xl object-cover bg-pink-50">
-                <div class="ml-4 flex-1">
-                    <h3 class="font-black text-sm text-gray-800 uppercase italic">Paleta de Sombras</h3>
-                    <p class="text-pink-600 font-bold text-xs">R$ 89,90</p>
-                    <button onclick="addToCart('Paleta de Sombras', 89.90)" class="mt-2 w-full bg-pink-100 text-pink-700 text-[10px] font-black py-2 rounded-xl uppercase">+ Adicionar</button>
+            <div class="product-card p-4 flex items-center gap-4" data-name="paleta de sombras olhos" data-category="olhos">
+                <div class="w-24 h-24 bg-gray-50 rounded-2xl overflow-hidden flex-shrink-0">
+                    <img src="https://i.ibb.co/0y48C7Yf/1000959799.jpg" class="w-full h-full object-cover">
                 </div>
-            </div>
-
-            <div class="product-card bg-white p-4 rounded-3xl shadow-md flex items-center" data-name="perfume rose gold" data-category="perfume vendidos">
-                <img src="https://picsum.photos/id/30/300/300" class="w-20 h-20 rounded-2xl object-cover bg-pink-50">
-                <div class="ml-4 flex-1">
-                    <h3 class="font-black text-sm text-gray-800 uppercase italic">Perfume Rose</h3>
-                    <p class="text-pink-600 font-bold text-xs">R$ 159,00</p>
-                    <button onclick="addToCart('Perfume Rose', 159.00)" class="mt-2 w-full bg-pink-100 text-pink-700 text-[10px] font-black py-2 rounded-xl uppercase">+ Adicionar</button>
+                <div class="flex-1">
+                    <h3 class="font-black text-sm text-gray-800">Paleta de Sombras</h3>
+                    <p class="text-pink-600 font-bold text-xs mb-3">R$ 35,00</p>
+                    <div class="flex gap-2">
+                        <button class="p-2.5 bg-pink-50 text-pink-600 rounded-xl text-xs"><i class="fa-solid fa-play"></i></button>
+                        <button onclick="addToCart('Paleta Sombras', 35.00)" class="flex-1 bg-pink-50 text-pink-700 text-[10px] font-black py-2.5 rounded-xl uppercase">+ Adicionar</button>
+                    </div>
                 </div>
             </div>
 
@@ -86,25 +105,25 @@
     </main>
 
     <div id="cart-btn" class="fixed bottom-8 right-8 hidden">
-        <button onclick="toggleCartModal()" class="pink-gradient text-white w-16 h-16 rounded-full shadow-2xl flex items-center justify-center relative border-4 border-white active:scale-90 transition">
+        <button onclick="toggleCartModal()" class="bg-pink-600 text-white w-16 h-16 rounded-full shadow-2xl flex items-center justify-center relative border-4 border-white active:scale-90 transition">
             <i class="fa-solid fa-cart-shopping text-xl"></i>
             <span id="cart-count" class="absolute -top-1 -right-1 bg-black text-white text-[10px] font-bold w-7 h-7 rounded-full flex items-center justify-center border-2 border-white">0</span>
         </button>
     </div>
 
     <div id="cart-modal" class="fixed inset-0 bg-black/60 hidden flex items-end justify-center">
-        <div class="bg-white w-full max-w-lg rounded-t-[40px] p-8 max-h-[85vh] overflow-y-auto shadow-2xl">
+        <div class="bg-white w-full max-w-lg rounded-t-[40px] p-8 max-h-[85vh] overflow-y-auto">
             <div class="flex justify-between items-center mb-6">
-                <h2 class="text-xl font-black text-gray-800 uppercase tracking-tighter">Meu Pedido</h2>
+                <h2 class="text-xl font-black text-gray-800 uppercase">Meu Carrinho</h2>
                 <button onclick="toggleCartModal()" class="text-gray-400 text-4xl">&times;</button>
             </div>
             <div id="cart-items" class="space-y-4 mb-8"></div>
             <div class="border-t pt-6">
-                <div class="flex justify-between font-black text-lg mb-6">
+                <div class="flex justify-between font-black text-lg mb-6 text-gray-800">
                     <span>Total:</span>
                     <span id="cart-total" class="text-pink-600">R$ 0,00</span>
                 </div>
-                <button onclick="sendWhatsApp()" class="w-full pink-gradient text-white py-5 rounded-3xl font-black uppercase tracking-widest shadow-xl">Finalizar no WhatsApp</button>
+                <button onclick="sendWhatsApp()" class="w-full bg-pink-600 text-white py-5 rounded-3xl font-black uppercase tracking-widest shadow-xl">Finalizar Pedido</button>
             </div>
         </div>
     </div>
@@ -125,18 +144,20 @@
             document.getElementById('cart-count').innerText = cart.reduce((acc, i) => acc + i.qty, 0);
             document.getElementById('cart-total').innerText = `R$ ${total.toFixed(2).replace('.',',')}`;
             document.getElementById('cart-items').innerHTML = cart.map((i, idx) => `
-                <div class="flex justify-between items-center bg-gray-50 p-4 rounded-2xl">
-                    <div class="text-sm italic font-bold text-gray-800">${i.qty}x ${i.name}</div>
+                <div class="flex justify-between items-center bg-gray-50 p-4 rounded-2xl shadow-inner">
+                    <div class="text-sm font-bold text-gray-800">${i.qty}x ${i.name}</div>
                     <button onclick="removeItem(${idx})" class="text-red-400 p-2"><i class="fa-solid fa-trash"></i></button>
                 </div>`).join('');
         }
 
         function removeItem(idx) { cart.splice(idx,1); updateUI(); if(!cart.length){ document.getElementById('cart-btn').classList.add('hidden'); toggleCartModal(); } }
         function toggleCartModal() { document.getElementById('cart-modal').classList.toggle('hidden'); }
+        
         function filterProducts() {
             const t = document.getElementById('search-input').value.toLowerCase();
             document.querySelectorAll('.product-card').forEach(c => c.classList.toggle('hidden', !c.getAttribute('data-name').includes(t)));
         }
+
         function filterCategory(cat, btn) {
             document.querySelectorAll('.category-btn').forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
@@ -145,8 +166,9 @@
                 c.classList.toggle('hidden', cat !== 'todos' && !cats.includes(cat));
             });
         }
+
         function sendWhatsApp() {
-            const m = `*NOVO PEDIDO - SHOP MIX IPUÃ*\n\n` + cart.map(i => `✅ *${i.qty}x* ${i.name}`).join('\n') + `\n\n*TOTAL: ${document.getElementById('cart-total').innerText}*`;
+            const m = `*PEDIDO SHOP MIX IPUÃ*\n\n` + cart.map(i => `✅ *${i.qty}x* ${i.name}`).join('\n') + `\n\n*TOTAL: ${document.getElementById('cart-total').innerText}*`;
             window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(m)}`);
         }
     </script>
